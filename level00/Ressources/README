@@ -1,0 +1,18 @@
+$> find / -user flag00 2>/dev/null
+
+give us files own by the user flag00
+	/usr/sbin/john
+	/rofs/usr/sbin/john
+
+those files contain the string "cdiiddwpgswtgt"
+which is a cesar encoded string of "nottoohardhere"
+
+it's the flag00's password
+
+$> su flag00
+Password: _
+
+$> getflag
+Check flag.Here is your token : x24ti5gi3x0ol2eh4esiuxias
+
+this token is the level01's password

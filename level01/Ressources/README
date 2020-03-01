@@ -1,0 +1,17 @@
+$> cat /etc/passwd
+
+give us the list of users in which we can see that users flag01 have a password hash
+	flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
+
+we can use "john the ripper" to reverse the password hash
+	abcdef
+
+it's the flag01's password
+
+$> su flag01
+Password: _
+
+$> getflag
+Check flag.Here is your token : f2av5il02puano7naaf6adaaf
+
+this token is the level02's password
