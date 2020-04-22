@@ -4,7 +4,7 @@ give us the list of users in which we can see that users flag01 have a password 
 	flag01:42hDRfypTqqnw:3001:3001::/home/flag/flag01:/bin/bash
 
 we can use "john the ripper" to reverse the password hash
-	abcdef
+	abcdefg
 
 it's the flag01's password
 
