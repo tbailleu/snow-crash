@@ -1,0 +1,41 @@
+for this level we have a suid binary own by the user flag09
+and a token file with read permission
+
+$> ./level09
+You need to provied only one arg.
+$> ./level09 aaaaa
+abcde
+$> ./level09 11111
+12345
+
+after disassembling the binary we can see the encoding mecanism
+	i = -1;
+	while (++i < strlen(argv[1]))
+		putchar(argv[1][i] + i);
+	fputc('\n', stdout);
+
+the token file seems to have been encoded with this binary
+we just need to reverse the algo by substracting i instead of adding i
+
+so at address 0x0000098A we can read	03 44 24 20
+	which in asm correspond to			ADD		EAX, dword [ESP + 0x20]
+
+we need to change those bytes to		2b 44 24 20
+	which in asm correspond to			SUB		EAX, dword [ESP + 0x20]
+
+
+$> cp level09 /tmp/new_level09
+$> printf '\x2b' | dd of=/tmp/new_level09 bs=1 seek=$((0x098a)) conv=notrunc
+
+$> /tmp/new_level09 `cat ~/token`
+f3iji1ju5yuevaus41q1afiuq
+
+it's the flag09's password
+
+$> su flag09
+Password: _
+
+$> getflag
+Check flag.Here is your token : s5cAJpM8ev6XHw998pRWG728z
+
+this token is the level10's password
