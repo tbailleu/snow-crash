@@ -1,0 +1,21 @@
+for this level we have a packet capture file
+
+after opening the file in wireshark we see a single TCP Stream
+
+by folowing the stream we see a login attempt with password
+	ft_wandr...NDRel.L0L
+
+dot represent character 127 in ascii aka [delete key]
+
+so the password use in login is
+	ft_waNDReL0L
+
+it's the flag02's password
+
+$> su flag02
+Password: _
+
+$> getflag
+Check flag.Here is your token : kooda2puivaav1idi4f57q8iq
+
+this token is the level03's password
