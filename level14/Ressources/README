@@ -1,0 +1,18 @@
+for this level we found nothing so we analize the getflag binary
+
+after disassembling the binary we can see a similar code
+	if (getuid() == 30XX) {
+		token = ft_des(key_flagXX);
+		fputs(token, stdout);
+	} else
+		...
+
+for this one we need the flag14 token and flag14 have uid 3014
+so we need to run
+	ft_des("g <t61:|4_|!@IF.-62FH&G~DCK/Ekrvvdwz?v|");
+
+ft_des function is the same as the precedent level so we can
+use the same code with the new string
+
+$> gcc ft_des.c && ./a.out
+your token is 7QiHafiNa3HVozsaXkawuYrTstxbpABHD8CPnHJ

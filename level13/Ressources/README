@@ -1,0 +1,26 @@
+for this level we have a suid binary own by the user flag013
+
+$> ./level13
+UID 2013 started us but we we expect 4242
+
+after disassembling the binary we can see the problem
+	if (getuid() != 4242) {
+		printf("UID %d started us but we we expect %d\n", getuid(), 4242)
+		exit(1);
+	}
+	token = ft_des("boe]!ai0FB@.:|L6l@A?>qJ}I");
+	printf("your token is %s\n", token);
+
+our uid here is 2013 and there isn't a user 4242
+so we have multiple choise to bypass the Check
+
+at first we can replace the getuid function via a dinamic library
+but a most simple method is to do a static analize of the binary
+
+we implemented the ft_des function from ASM in ft_des.c
+so we can decode the token more easily
+
+$> gcc ft_des.c && ./a.out
+your token is 2A31L79asukciNyi8uppkEuSx
+
+this token is the level14's password
